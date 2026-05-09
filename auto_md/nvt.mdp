@@ -1,0 +1,52 @@
+define                   = -DPOSRES_B -DPOSRES_A
+
+integrator               = md
+dt                       = 0.002 
+nsteps                   = 500000 ;100ps
+
+nstxout                  = 0
+nstfout                  = 0
+compressed-x-grps        = System
+nstxout-compressed       = 5000 
+nstvout                  = 5000
+nstenergy                = 5000
+nstlog                   = 5000
+
+;键约束
+constraints              = h-bonds
+continuation             = no         
+constraint_algorithm     = lincs       
+lincs_iter               = 1            
+lincs_order              = 4        
+
+;周期性边界条件
+pbc                      = xyz
+
+;非键设置
+cutoff-scheme            = Verlet
+ns_type                  = grid
+nstlist                  = 10
+rcoulomb                 = 1.2
+rvdw                     = 1.2
+DispCorr                 = EnerPres
+
+;静电
+coulombtype              = PME  
+pme_order                = 4   
+fourierspacing           = 0.16 
+
+;温度耦合
+tcoupl                   = v-rescale            
+tc-grps                  = Protein Non-Protein
+tau_t                    = 0.1  0.1
+ref_t                    = 310 310
+
+
+;关闭压力耦合
+pcoupl                   = no                 
+
+; 
+gen_vel                  = yes    
+gen_temp                 = 310 ;40C
+gen_seed                 = -1  
+

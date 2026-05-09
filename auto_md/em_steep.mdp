@@ -1,0 +1,21 @@
+define                   = -DPOSRES_B -DPOSRES_A
+
+integrator               = steep                         
+nsteps                   = 50000                           
+emtol                    = 200.0                           
+emstep                   = 0.01                            
+;
+nstxout                  = 
+nstxout-compressed       = 
+nstenergy                = 
+;
+pbc = xyz
+cutoff-scheme            = Verlet
+coulombtype              = PME
+rcoulomb                 = 1.2
+rvdw                     = 1.2
+ns_type                  = grid
+nstlist                  = 1
+
+
+

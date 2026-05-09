@@ -1,0 +1,51 @@
+integrator               = md
+dt                       = 0.002 
+nsteps                   = 50000000 ;100ns
+
+nstxout                  = 0
+nstfout                  = 0
+compressed-x-grps        = System
+nstxout-compressed       = 100000
+nstvout                  = 500000
+nstenergy                = 500000
+nstlog                   = 500000
+
+;键约束
+constraints              = h-bonds
+continuation             = yes       
+constraint_algorithm     = lincs       
+lincs_iter               = 1            
+lincs_order              = 4        
+
+;周期性边界条件
+pbc                      = xyz
+
+;非键设置
+cutoff-scheme            = Verlet
+ns_type                  = grid
+nstlist                  = 10
+rcoulomb                 = 1.2
+rvdw                     = 1.2
+DispCorr                 = EnerPres
+
+;静电
+coulombtype              = PME  
+pme_order                = 4   
+fourierspacing           = 0.16 
+
+;温度耦合
+tcoupl                   = v-rescale            
+tc-grps                  = Protein Non-Protein
+tau_t                    = 0.1  0.1
+ref_t                    = 310 310
+
+;压力耦合
+pcoupl                   = Parrinello-Rahman
+pcoupltype               = isotropic           ; 均匀缩放盒向量
+tau_p                    = 2.0                 ; 时间常数 (ps)
+ref_p                    = 1.0                 ; 参考压力 (bar)
+compressibility          = 4.5e-5              ; 水的等温压缩系数 (bar^-1)
+
+; 
+gen_vel                  = no   
+

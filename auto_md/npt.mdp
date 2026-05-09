@@ -1,0 +1,54 @@
+define                   = -DPOSRES_B -DPOSRES_A
+
+integrator               = md
+dt                       = 0.002 
+nsteps                   = 1000000 
+
+nstxout                  = 0
+nstfout                  = 0
+compressed-x-grps        = System
+nstxout-compressed       = 5000 
+nstvout                  = 5000
+nstenergy                = 5000
+nstlog                   = 5000
+
+;键约束
+constraints              = h-bonds
+continuation             = yes       
+constraint_algorithm     = lincs       
+lincs_iter               = 1            
+lincs_order              = 4        
+
+;周期性边界条件
+pbc                      = xyz
+
+;非键设置
+cutoff-scheme            = Verlet
+ns_type                  = grid
+nstlist                  = 10
+rcoulomb                 = 1.2
+rvdw                     = 1.2
+DispCorr                 = EnerPres
+
+;静电
+coulombtype              = PME  
+pme_order                = 4   
+fourierspacing           = 0.16 
+
+;温度耦合
+tcoupl                   = v-rescale            
+tc-grps                  = Protein Non-Protein
+tau_t                    = 0.1  0.1
+ref_t                    = 310 310
+
+;关闭压力耦合
+pcoupl                   = C-rescale
+pcoupltype               = isotropic ; 均匀缩放盒向量
+tau_p                    = 2.0 ; 时间常数 (ps)
+ref_p                    = 1.0 ; 参考压力 (bar)
+compressibility          = 4.5e-6 ; 水的等温压缩系数 (bar^-1)
+refcoord_scaling         = com ; 参考坐标缩放方法
+
+; 
+gen_vel                  = no   
+
